@@ -1,3 +1,5 @@
+require 'ruby-saml'
+
 module AltheaPassport
 
   class User
@@ -46,15 +48,20 @@ module AltheaPassport
     end
 
     def self.get_saml_settings
+      base_url = AltheaPassport.configuration.base_url
+      idp_url = AltheaPassport.configuration.idp_url
+      saml_fingerprint = AltheaPassport.configuration.saml_fingerprint
+      saml_format = AltheaPassport.configuration.saml_format
+
       settings = OneLogin::RubySaml::Settings.new
-      settings.assertion_consumer_service_url = "#{ENV['base_url']}/saml/acs"
-      settings.assertion_consumer_logout_service_url = "#{ENV['base_url']}/saml/logout"
-      settings.issuer                         = "#{ENV['base_url']}/saml/acs"
-      settings.idp_entity_id                  = "#{ENV['idp_url']}/saml/auth"
-      settings.idp_sso_target_url             = "#{ENV['idp_url']}/saml/auth"
-      settings.idp_slo_target_url             = "#{ENV['idp_url']}/saml/logout"
-      settings.idp_cert_fingerprint           = ENV['SAML_FINGERPRINT']
-      settings.name_identifier_format         = ENV['SAML_FORMAT']
+      settings.assertion_consumer_service_url        = "#{base_url}/saml/acs"
+      settings.assertion_consumer_logout_service_url = "#{base_url}/saml/logout"
+      settings.issuer                                = "#{base_url}/saml/acs"
+      settings.idp_entity_id                         = "#{idp_url}/saml/auth"
+      settings.idp_sso_target_url                    = "#{idp_url}/saml/auth"
+      settings.idp_slo_target_url                    = "#{idp_url}/saml/logout"
+      settings.idp_cert_fingerprint                  = saml_fingerprint
+      settings.name_identifier_format                = saml_format
       settings
     end
 

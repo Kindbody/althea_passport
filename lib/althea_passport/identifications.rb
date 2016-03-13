@@ -1,9 +1,10 @@
+require 'rest-client'
+
 module AltheaPassport
 
   class Identifications
 
-    # BASE_URL = "#{ENV['idp_url']}/api"
-    BASE_URL = 'http://localhost:4567/api'
+    BASE_URL = "#{AltheaPassport.configuration.idp_url}/api"
 
     class << self
 

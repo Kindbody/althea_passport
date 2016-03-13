@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock"
   spec.add_development_dependency "pry-rails"
 
+  spec.add_dependency "ruby-saml"
   spec.add_dependency "rest-client"
   spec.add_dependency "json"
 end
