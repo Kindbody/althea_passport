@@ -17,7 +17,7 @@ module AltheaPassport
       end
 
       def url(path)
-        BASE_URL + path
+        "#{BASE_URL}#{path}"
       end
 
     end

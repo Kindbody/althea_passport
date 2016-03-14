@@ -4,6 +4,7 @@ require "althea_passport/configuration"
 module AltheaPassport
 
   class << self
+
     attr_writer :configuration
 
     def configuration
@@ -13,8 +14,8 @@ module AltheaPassport
     def configure
       yield(configuration)
     end
-  end
 
+  end
 
 end
 
