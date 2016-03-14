@@ -4,8 +4,6 @@ module AltheaPassport
 
   class Identifications
 
-    BASE_URL = "#{AltheaPassport.configuration.idp_url}/api"
-
     class << self
 
       def get(path, token)
@@ -17,7 +15,7 @@ module AltheaPassport
       end
 
       def url(path)
-        "#{BASE_URL}#{path}"
+        "#{AltheaPassport.configuration.idp_url}/api#{path}"
       end
 
     end
