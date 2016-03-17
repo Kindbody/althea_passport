@@ -1,5 +1,4 @@
 module AltheaPassport
-
   class EmptyUser
 
     attr_writer :role
@@ -13,5 +12,4 @@ module AltheaPassport
     end
 
   end
-
 end

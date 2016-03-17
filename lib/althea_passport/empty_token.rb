@@ -1,5 +1,4 @@
 module AltheaPassport
-
   class EmptyToken
 
     def initialize
@@ -19,5 +18,4 @@ module AltheaPassport
     end
 
   end
-
 end

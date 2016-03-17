@@ -1,9 +1,7 @@
 module AltheaPassport
-
   class SafeToken
 
     class << self
-
       def set(key)
         token = key.blank? ? EmptyToken.new : Token.new(key)
 
@@ -13,9 +11,7 @@ module AltheaPassport
           EmptyToken.new
         end
       end
-
     end
 
   end
-
 end

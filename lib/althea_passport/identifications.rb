@@ -1,11 +1,9 @@
 require 'rest-client'
 
 module AltheaPassport
-
   class Identifications
 
     class << self
-
       def get(path, token)
         RestClient.get(url(path), { Authorization: "Token #{token}" })
       end
@@ -17,9 +15,7 @@ module AltheaPassport
       def url(path)
         "#{AltheaPassport.configuration.idp_url}/api#{path}"
       end
-
     end
 
   end
-
 end

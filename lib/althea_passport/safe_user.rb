@@ -1,9 +1,7 @@
 module AltheaPassport
-
   class SafeUser
 
     class << self
-
       def find(id, key)
         return EmptyUser.new if (id.blank? || key.blank?)
 
@@ -14,9 +12,7 @@ module AltheaPassport
           EmptyUser.new
         end
       end
-
     end
 
   end
-
 end

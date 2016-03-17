@@ -1,6 +1,6 @@
 module AltheaPassport
-
   class Token
+
     attr_accessor :key, :status
 
     def initialize(key)
@@ -36,6 +36,6 @@ module AltheaPassport
 
       new_key
     end
-  end
 
+  end
 end

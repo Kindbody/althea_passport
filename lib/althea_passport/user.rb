@@ -1,11 +1,22 @@
 require 'ruby-saml'
 
 module AltheaPassport
-
   class User
 
-    class << self
+    attr_reader :id, :name, :token, :initials, :photo_url, :thumbnail_url, :signature_url
+    attr_accessor :role
 
+    def initialize(info, token)
+      @id = info[:id]
+      @name = info[:name]
+      @token = token
+      @initials = info[:initials]
+      @photo_url = info[:photo].try(:[], :url)
+      @thumbnail_url = info[:photo].try(:[], :thumb).try(:[], :url)
+      @signature_url = info[:signature].try(:[], :url)
+    end
+
+    class << self
       def for_lab(lab_id, token)
         # WHAT'S THE CORRECT ACTION IF AN EXCEPTION OCCURS? #
         begin
@@ -16,7 +27,6 @@ module AltheaPassport
         end
 
         user_info_hash = {}
-
 
         JSON.parse(response)['labUsersInfo'].each do |user_info|
           symbolized_info = user_info.deep_symbolize_keys
@@ -31,20 +41,6 @@ module AltheaPassport
         info = JSON.parse(response).deep_symbolize_keys[:user]
         new(info, token)
       end
-
-    end
-
-    attr_reader :id, :name, :token, :initials, :photo_url, :thumbnail_url, :signature_url
-    attr_accessor :role
-
-    def initialize(info, token)
-      @id = info[:id]
-      @name = info[:name]
-      @token = token
-      @initials = info[:initials]
-      @photo_url = info[:photo].try(:[], :url)
-      @thumbnail_url = info[:photo].try(:[], :thumb).try(:[], :url)
-      @signature_url = info[:signature].try(:[], :url)
     end
 
     def self.get_saml_settings
@@ -66,5 +62,4 @@ module AltheaPassport
     end
 
   end
-
 end
