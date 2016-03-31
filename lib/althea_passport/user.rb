@@ -1,4 +1,5 @@
 require 'ruby-saml'
+require 'active_support/core_ext/hash'
 
 module AltheaPassport
   class User
@@ -36,8 +37,8 @@ module AltheaPassport
         user_info_hash
       end
 
-      def find(user_id, token)
-        response = AltheaPassport::Identifications.get("/users/#{user_id}/info", token)
+      def find(token)
+        response = AltheaPassport::Identifications.bearer_get("/user/info", token)
         info = JSON.parse(response).deep_symbolize_keys[:user]
         new(info, token)
       end

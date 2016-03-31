@@ -12,7 +12,7 @@ module AltheaPassport
 
     def self.find(lab_id, token)
       begin
-        response = Identifications.get("/labs/#{lab_id}/login?service_url=#{AltheaPassport.configuration.base_url}/saml/acs", token)
+        response = Identifications.get("/labs/#{lab_id}/login/new?service_url=#{AltheaPassport.configuration.base_url}/saml/acs", token)
       rescue => e
         ##### TODO - NEED TO ADD API ERROR HANDLING ######
         p e.response

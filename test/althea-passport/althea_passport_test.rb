@@ -11,11 +11,13 @@ class AltheaPassportTest < Minitest::Test
       config.idp_url = 'idp_url'
       config.saml_fingerprint = 'saml_fingerprint'
       config.saml_format = 'saml_format'
+      config.jwt_secret_key = 'jwt_secret_key'
     end
 
     assert AltheaPassport.configuration.base_url = 'base_url'
     assert AltheaPassport.configuration.idp_url = 'idp_url'
     assert AltheaPassport.configuration.saml_fingerprint = 'saml_fingerprint'
     assert AltheaPassport.configuration.saml_format = 'saml_format'
+    assert AltheaPassport.configuration.jwt_secret_key = 'jwt_secret_key'
   end
 end

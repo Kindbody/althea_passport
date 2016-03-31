@@ -1,6 +1,6 @@
 require './test/test_helper'
 
-class AltheaPassportTokenTest < Minitest::Test
+class TokenTest < Minitest::Test
 
   def test_connection
     token = AltheaPassport::Token.new('427d241d409210baa660614bc2508379')

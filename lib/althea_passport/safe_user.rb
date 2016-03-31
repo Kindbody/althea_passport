@@ -2,10 +2,10 @@ module AltheaPassport
   class SafeUser
 
     class << self
-      def find(id, key)
-        return EmptyUser.new if (id.blank? || key.blank?)
+      def find(token)
+        return EmptyUser.new if token.blank?
 
-        user = User.find(id, key)
+        user = User.find(token)
         if user.present?
           user
         else

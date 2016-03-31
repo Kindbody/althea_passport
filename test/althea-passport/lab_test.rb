@@ -1,6 +1,6 @@
 require './test/test_helper'
 
-class AltheaPassportLabTest < Minitest::Test
+class LabTest < Minitest::Test
   def test_exists
     assert AltheaPassport::Lab
   end

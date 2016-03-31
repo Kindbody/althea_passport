@@ -9,6 +9,10 @@ module AltheaPassport
       nil
     end
 
+    def present?
+      false
+    end
+
     def valid?
       false
     end
