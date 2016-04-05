@@ -8,10 +8,6 @@ module AltheaPassport
         RestClient.get(url(path), { Authorization: "Token #{token}" })
       end
 
-      def bearer_get(path, token)
-        RestClient.get(url(path), { Authorization: "Bearer #{token}" })
-      end
-
       def post(path, body, token)
         RestClient.post(url(path), body, { Authorization: "Token #{token}" })
       end

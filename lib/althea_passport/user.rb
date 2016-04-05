@@ -38,7 +38,7 @@ module AltheaPassport
       end
 
       def find(token)
-        response = AltheaPassport::Identifications.bearer_get("/user/info", token)
+        response = AltheaPassport::Identifications.get("/user/info", token)
         info = JSON.parse(response).deep_symbolize_keys[:user]
         new(info, token)
       end
