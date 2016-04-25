@@ -1,4 +1,3 @@
-require 'ruby-saml'
 require 'active_support/core_ext/hash'
 
 module AltheaPassport
@@ -42,24 +41,12 @@ module AltheaPassport
         info = JSON.parse(response).deep_symbolize_keys[:user]
         new(info, token)
       end
-    end
 
-    def self.get_saml_settings
-      base_url = AltheaPassport.configuration.base_url
-      idp_url = AltheaPassport.configuration.idp_url
-      saml_fingerprint = AltheaPassport.configuration.saml_fingerprint
-      saml_format = AltheaPassport.configuration.saml_format
-
-      settings = OneLogin::RubySaml::Settings.new
-      settings.assertion_consumer_service_url        = "#{base_url}/saml/acs"
-      settings.assertion_consumer_logout_service_url = "#{base_url}/saml/logout"
-      settings.issuer                                = "#{base_url}/saml/acs"
-      settings.idp_entity_id                         = "#{idp_url}/saml/auth"
-      settings.idp_sso_target_url                    = "#{idp_url}/saml/auth"
-      settings.idp_slo_target_url                    = "#{idp_url}/saml/logout"
-      settings.idp_cert_fingerprint                  = saml_fingerprint
-      settings.name_identifier_format                = saml_format
-      settings
+      def find_by_id(id, token)
+        response = AltheaPassport::Identifications.get("/users/#{id}/info", token)
+        info = JSON.parse(response).deep_symbolize_keys[:user]
+        new(info, token)
+      end
     end
 
   end

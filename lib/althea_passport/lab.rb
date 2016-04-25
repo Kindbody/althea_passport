@@ -10,38 +10,42 @@ module AltheaPassport
       @current_user_role = lab['user_role']
     end
 
-    def self.find(lab_id, token)
-      begin
-        response = Identifications.get("/labs/#{lab_id}/login/new?service_url=#{AltheaPassport.configuration.base_url}/saml/acs", token)
-      rescue => e
-        ##### TODO - NEED TO ADD API ERROR HANDLING ######
-        p e.response
-      end
-
-      new(JSON.parse(response))
+    def present?
+      id.present?
     end
 
-    def logo(lab_id, token)
-      begin
-        response = Identifications.get("/labs/#{lab_id}/logo", token)
-      rescue => e
-        ##### TODO - NEED TO ADD API ERROR HANDLING ######
-        p e.response
+    class << self
+      def find(lab_id, token)
+        begin
+          response = Identifications.get("/labs/#{lab_id}/login?service=#{AltheaPassport.configuration.service_name}", token)
+        rescue => e
+          ##### TODO - NEED TO ADD API ERROR HANDLING ######
+          p e.response
+        end
+
+        new(JSON.parse(response))
       end
 
-      JSON.parse(response)['lab_logo']['logo']['url']
-    end
+      def logo(lab_id, token)
+        begin
+          response = Identifications.get("/labs/#{lab_id}/logo", token)
+        rescue => e
+          ##### TODO - NEED TO ADD API ERROR HANDLING ######
+          p e.response
+        end
 
-    def validate_user_access(token)
-      return 401 if token.blank?
-
-      begin
-        response = Identifications.get("/labs/#{@id}/validate/user", token)
-      rescue => e
-        response = e.response
+        JSON.parse(response)['lab_logo']['logo']['url']
       end
 
-      response.code
+      def validate_user_access(lab_id, token)
+        begin
+          response = Identifications.get("/labs/#{lab_id}/validate/user", token)
+        rescue => e
+          response = e.response
+        end
+
+        response.code
+      end
     end
 
   end
