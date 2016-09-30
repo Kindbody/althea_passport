@@ -37,6 +37,16 @@ module AltheaPassport
         JSON.parse(response)['lab_logo']['logo']['url']
       end
 
+      def create_sign_in(token)
+        begin
+          Identifications.post('/lab/sign_in', {}, token)
+        rescue => e
+          ##### TODO - NEED TO ADD API ERROR HANDLING ######
+          p e.response
+        end
+      end
+
+      # TODO: REMOVE THIS
       def validate_user_access(lab_id, token)
         begin
           response = Identifications.get("/labs/#{lab_id}/validate/user", token)
