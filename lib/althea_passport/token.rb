@@ -1,41 +1,29 @@
 module AltheaPassport
   class Token
+    class << self
 
-    attr_accessor :key, :status
+      def validate(token)
+        return nil unless token.present?
 
-    def initialize(key)
-      @status = 401
-      @key = fresh(key)
-      self.freeze
-    end
-
-    def valid?
-      status == 200
-    end
-
-    def invalid?
-      status != 200
-    end
-
-    private
-
-    def fresh(key)
-      begin
-        response = AltheaPassport::Identifications.get("/token/validate", key)
-      rescue => e
-        response = e.response
+        begin
+          response = AltheaPassport::Identifications.get('/identity/validate-token', token)
+          return JSON.parse(response)['token']
+        rescue => e
+          return nil
+        end
       end
 
-      if response.code == 200
-        new_key = JSON.parse(response)["token"]
-      elsif response.code == 401
-        new_key = nil
+      def invalidate(token)
+        return unless token.present?
+
+        begin
+          AltheaPassport::Identifications.get('/identity/sign-out', token)
+        rescue => e
+          #TODO: Is just retrying sufficient?
+          AltheaPassport::Identifications.get('/identity/sign-out', token)
+        end
       end
 
-      self.status = response.code
-
-      new_key
     end
-
   end
 end
