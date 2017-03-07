@@ -10,8 +10,8 @@ module AltheaPassport
         library.encode(payload, secret_key, algorithm)
       end
 
-      def decode(token, library = JWT)
-        decoded_token = library.decode(token, secret_key, true, { algorithm: algorithm })
+      def decode(token, options = {}, library = JWT)
+        decoded_token = library.decode(token, secret_key, true, { algorithm: algorithm }.merge(options))
         decoded_token.first.deep_symbolize_keys
       end
 
