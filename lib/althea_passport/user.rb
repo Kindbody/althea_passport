@@ -3,7 +3,7 @@ require 'active_support/core_ext/hash'
 module AltheaPassport
   class User
 
-    attr_reader :id, :name, :token, :initials, :photo_url, :thumbnail_url, :signature_url, :email
+    attr_reader :id, :name, :token, :initials, :photo_url, :thumbnail_url, :signature_url, :email, :trialing, :days_left_on_trial
     attr_accessor :role
 
     def initialize(info, token)
@@ -15,6 +15,8 @@ module AltheaPassport
       @photo_url = info[:photo].try(:[], :url)
       @thumbnail_url = info[:photo].try(:[], :thumb).try(:[], :url)
       @signature_url = info[:signature].try(:[], :url)
+      @signature_url = info[:trialing]
+      @signature_url = info[:days_left_on_trial]
     end
 
     class << self
