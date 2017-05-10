@@ -15,8 +15,8 @@ module AltheaPassport
       @photo_url = info[:photo].try(:[], :url)
       @thumbnail_url = info[:photo].try(:[], :thumb).try(:[], :url)
       @signature_url = info[:signature].try(:[], :url)
-      @signature_url = info[:trialing]
-      @signature_url = info[:days_left_on_trial]
+      @trialing = info[:trialing]
+      @days_left_on_trial = info[:days_left_on_trial]
     end
 
     class << self
