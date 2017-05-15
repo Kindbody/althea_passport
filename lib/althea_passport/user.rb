@@ -18,7 +18,7 @@ module AltheaPassport
       @trialing = info[:trialing]
       @days_left_on_trial = info[:days_left_on_trial]
       @has_upgraded = info[:has_upgraded]
-      @has_updated_settings = info['has_updated_settings']
+      @has_updated_settings = info[:has_updated_settings]
     end
 
     class << self
