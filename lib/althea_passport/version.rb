@@ -1,3 +1,3 @@
 module AltheaPassport
-  VERSION = '0.7.9'
+  VERSION = '0.7.92'
 end
