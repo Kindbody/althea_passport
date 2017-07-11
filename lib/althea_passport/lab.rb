@@ -1,13 +1,14 @@
 module AltheaPassport
   class Lab
 
-    attr_reader :id, :name, :time_zone, :current_user_role
+    attr_reader :id, :name, :time_zone, :current_user_role, :trial_has_ended
 
     def initialize(lab)
       @id = lab['lab_id']
       @name = lab['lab_name']
       @time_zone = lab['lab_time_zone']
       @current_user_role = lab['user_role']
+      @trial_has_ended = lab['trial_has_ended']
     end
 
     def present?
