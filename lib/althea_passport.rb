@@ -8,6 +8,7 @@ require "althea_passport/token"
 require "althea_passport/token_coder"
 require "althea_passport/user"
 require "althea_passport/api_base"
+require "althea_passport/api_exception"
 
 module AltheaPassport
 

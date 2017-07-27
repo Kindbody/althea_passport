@@ -15,8 +15,8 @@ module AltheaPassport
           else
             response
           end
-        elsif
-          { status: :error, message: "HTTP STATUS CODE #{response.status}" }
+        else
+          raise AltheaPassport::ApiException.new("Http error status code: #{response.status} url: #{url}")
         end
       end
 
