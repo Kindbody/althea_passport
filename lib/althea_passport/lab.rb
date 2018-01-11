@@ -1,7 +1,8 @@
 module AltheaPassport
   class Lab
 
-    attr_reader :id, :name, :time_zone, :current_user_role, :current_user_moderator, :trial_has_ended, :subdomain, :logo, :language
+    attr_reader :id, :name, :time_zone, :current_user_role, :current_user_moderator, :trial_has_ended,
+                :subdomain, :logo, :language, :zoho_auth_token, :zoho_organization_id
 
     def initialize(lab)
       @id = lab['lab_id']
@@ -13,6 +14,8 @@ module AltheaPassport
       @subdomain = lab['subdomain']
       @logo = lab['logo']
       @language = lab['language']
+      @zoho_auth_token = lab['zoho_auth_token']
+      @zoho_organization_id = lab['zoho_organization_id']
     end
 
     def present?
