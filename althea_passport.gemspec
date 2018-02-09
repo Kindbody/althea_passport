@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "pry-rails", "~> 0.3"
 
-  spec.add_dependency "rest-client", "~> 1.8"
+  spec.add_dependency "rest-client", "~> 2.0"
   spec.add_dependency "faraday", "~> 0.9"
   spec.add_dependency "json", "~> 1.8"
   spec.add_dependency "jwt", "~> 1.5"
