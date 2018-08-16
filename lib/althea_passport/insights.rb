@@ -19,6 +19,8 @@ module AltheaPassport
       # end
 
       def log_request(request)
+        return unless AltheaPassport.configuration.insights_url.present?
+
         data = {
           time: Time.now.utc,
           url: request.url,
