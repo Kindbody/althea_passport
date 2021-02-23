@@ -22,7 +22,12 @@ module AltheaPassport
 
       def host(url)
         uri = URI.parse(url)
-        "#{uri.scheme}://#{uri.host}"
+        "#{uri.scheme}://#{uri.host}" + port(uri)
+      end
+
+      def port(uri)
+        return "" if Rails.env.production?
+        ":#{uri.port}"
       end
     end
   end
