@@ -1,29 +1,40 @@
 module AltheaPassport
   class HttpClient
+    include AltheaPassport::Caching
     @@prev_request = nil
-    attr_reader :method, :url, :data, :headers, :response, :token
+    attr_reader :method, :url, :data, :headers, :response, :token, :cache
 
-    def initialize(method, url, token, data = nil, headers = {})
+    def initialize(method, url, token, data = nil, headers: {}, cache: {})
       @method = method
       @url = url
       @token = token
       @data = data
       @headers = headers
+      @cache = cache
     end
 
     def call
-      @@prev_request&.flush
+      call_cached do
+        @@prev_request&.flush
 
-      if data
-        @response = with_params
-      else
-        @response = without_params
+        if data
+          @response = with_params
+        else
+          @response = without_params
+        end
+
+        @@prev_request = AltheaPassport::HttpClientResponse.new(response)
       end
-
-      @@prev_request = AltheaPassport::HttpClientResponse.new(response)
     end
 
     private
+
+    def call_cached
+      yield if cache.empty?
+      cache_block(cache[:key], cache[:expires_in]) do
+        yield
+      end
+    end
 
     def with_params
       default_client.send(method, url, json: data)

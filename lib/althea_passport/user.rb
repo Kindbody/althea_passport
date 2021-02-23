@@ -24,9 +24,12 @@ module AltheaPassport
 
     class << self
       def for_lab(lab_id, token)
+        cache_key = "user/for_lab/lab-#{lab_id}"
+        expires_in = 5.minutes
+
         # WHAT'S THE CORRECT ACTION IF AN EXCEPTION OCCURS? #
         begin
-          response = AltheaPassport::Identifications.get("/users/lab/#{lab_id}/info", token)
+          response = AltheaPassport::Identifications.get("/users/lab/#{lab_id}/info", token, cache: { key: cache_key, expires_in: expires_in})
         rescue => e
           ###### NEED TO ADD API ERROR HANDLING ######
           p e.response
@@ -43,13 +46,19 @@ module AltheaPassport
       end
 
       def find(token)
-        response = AltheaPassport::Identifications.get("/user/info", token)
+        cache_key = "user/find/user-#{token}"
+        expires_in = 5.minutes
+
+        response = AltheaPassport::Identifications.get("/user/info", token, cache: { key: cache_key, expires_in: expires_in})
         info = JSON.parse(response).deep_symbolize_keys[:user]
         new(info, token)
       end
 
       def find_by_id(id, token)
-        response = AltheaPassport::Identifications.get("/users/#{id}/info", token)
+        cache_key = "user/find_by_id/user-#{id}-#{token}"
+        expires_in = 5.minutes
+
+        response = AltheaPassport::Identifications.get("/users/#{id}/info", token, cache: { key: cache_key, expires_in: expires_in})
         info = JSON.parse(response).deep_symbolize_keys[:user]
         new(info, token)
       end

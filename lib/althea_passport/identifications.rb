@@ -2,12 +2,12 @@ module AltheaPassport
   class Identifications
 
     class << self
-      def get(path, token)
-        HttpClient.new(:get, url(path), token).call.json
+      def get(path, token, cache: {})
+        HttpClient.new(:get, url(path), token, cache: cache).call.json
       end
 
-      def post(path, body, token)
-        HttpClient.new(:post, url(path), token, body).call.json
+      def post(path, body, token, cache: {})
+        HttpClient.new(:post, url(path), token, body, cache: cache).call.json
       end
 
       def url(path)
