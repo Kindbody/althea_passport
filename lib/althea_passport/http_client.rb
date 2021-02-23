@@ -30,7 +30,7 @@ module AltheaPassport
     private
 
     def call_cached
-      yield if cache.empty?
+      return yield if cache.empty?
       cache_block(cache[:key], expires_in: cache[:expires_in]) do
         yield
       end
