@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["csanders2308@gmail.com"]
 
   spec.summary       = "This is a short summary."
+  # spec.description   = %q{TODO: Write a longer description or delete this line.}
   spec.homepage      = "http://genera.tions.io"
   spec.license       = "MIT"
 
@@ -18,8 +19,14 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_development_dependency "bundler", "~> 1.11"
+  spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "minitest", "~> 5.0"
+  spec.add_development_dependency "pry-rails", "~> 0.3"
 
-  spec.add_dependency "http", ">= 4.4"
+  spec.add_dependency "rest-client", "~> 2.0"
+  spec.add_dependency "faraday", "~> 0.9"
+  spec.add_dependency "json", "~> 1.8"
   spec.add_dependency "jwt", "~> 1.5"
+  # spec.add_dependency "mongo", "~> 2.4"
 end

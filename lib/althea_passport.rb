@@ -1,7 +1,4 @@
 require "althea_passport/version"
-require "althea_passport/persistent_http_client"
-require "althea_passport/http_client"
-require "althea_passport/http_client_response"
 require "althea_passport/configuration"
 require "althea_passport/empty_user"
 require "althea_passport/identifications"

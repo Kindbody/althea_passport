@@ -1,13 +1,15 @@
+require 'rest-client'
+
 module AltheaPassport
   class Identifications
 
     class << self
       def get(path, token)
-        HttpClient.new(:get, url(path), token).call
+        RestClient.get(url(path), { Authorization: "Token #{token}" })
       end
 
       def post(path, body, token)
-        HttpClient.new(:post, url(path), token, body).call
+        RestClient.post(url(path), body, { Authorization: "Token #{token}" })
       end
 
       def url(path)

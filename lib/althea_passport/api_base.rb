@@ -3,8 +3,11 @@ module AltheaPassport
     attr_accessor :token
 
     class << self
+
       def call_althea_api(method, token, url, attributes = nil)
-        response = HttpClient.new(method, url, token, attributes).call
+        response = Faraday.send(method, url, attributes) do |req|
+          req.headers['Authorization'] = "Token #{token}"
+        end
 
         if response.success?
           if block_given?
@@ -16,6 +19,7 @@ module AltheaPassport
           raise AltheaPassport::ApiException.new("Http error status code: #{response.status} url: #{url}")
         end
       end
+
     end
   end
 end
