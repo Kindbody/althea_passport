@@ -29,7 +29,7 @@ module AltheaPassport
           p e.response
         end
 
-        new(JSON.parse(response))
+        new(JSON.parse(response.body))
       end
 
       def logo(lab_id, token)
@@ -40,7 +40,7 @@ module AltheaPassport
           p e.response
         end
 
-        JSON.parse(response)['lab_logo']['logo']['url']
+        JSON.parse(response.body)['lab_logo']['logo']['url']
       end
 
       def create_sign_in(token)

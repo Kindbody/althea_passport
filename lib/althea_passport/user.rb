@@ -34,7 +34,7 @@ module AltheaPassport
 
         user_info_hash = {}
 
-        JSON.parse(response)['labUsersInfo'].each do |user_info|
+        JSON.parse(response.body)['labUsersInfo'].each do |user_info|
           symbolized_info = user_info.deep_symbolize_keys
           user_info_hash[user_info['id']] = new(symbolized_info, token)
         end
@@ -44,13 +44,13 @@ module AltheaPassport
 
       def find(token)
         response = AltheaPassport::Identifications.get("/user/info", token)
-        info = JSON.parse(response).deep_symbolize_keys[:user]
+        info = JSON.parse(response.body).deep_symbolize_keys[:user]
         new(info, token)
       end
 
       def find_by_id(id, token)
         response = AltheaPassport::Identifications.get("/users/#{id}/info", token)
-        info = JSON.parse(response).deep_symbolize_keys[:user]
+        info = JSON.parse(response.body).deep_symbolize_keys[:user]
         new(info, token)
       end
     end

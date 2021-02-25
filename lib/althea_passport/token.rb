@@ -7,7 +7,7 @@ module AltheaPassport
 
         begin
           response = AltheaPassport::Identifications.get('/identity/validate-token', token)
-          return JSON.parse(response)['token']
+          return JSON.parse(response.body)['token']
         rescue => e
           return nil
         end
