@@ -1,7 +1,7 @@
 module AltheaPassport
   class Lab
 
-    attr_reader :id, :name, :time_zone, :current_user_role, :current_user_moderator, :trial_has_ended,
+    attr_reader :id, :name, :time_zone, :current_user_role, :current_user_lab_role, :current_user_moderator, :trial_has_ended,
                 :subdomain, :logo, :language
 
     def initialize(lab)
@@ -9,6 +9,7 @@ module AltheaPassport
       @name = lab['lab_name']
       @time_zone = lab['lab_time_zone']
       @current_user_role = lab['user_role']
+      @current_user_lab_role = lab['lab_role']
       @current_user_moderator = lab['lab_moderator']
       @trial_has_ended = lab['trial_has_ended']
       @subdomain = lab['subdomain']
