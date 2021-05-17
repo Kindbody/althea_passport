@@ -21,5 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
 
   spec.add_dependency "http", ">= 4.4"
-  spec.add_dependency "jwt", "~> 1.5"
+  spec.add_dependency "jwt", "~> 2.2"
 end
